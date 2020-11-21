@@ -13,7 +13,6 @@ import { Grid, Col } from "react-native-easy-grid";
 import { FlatList, TouchableOpacity, Image } from "react-native";
 import BusinessResource from "../resources/Business.resource";
 
-
 const RestaurantComponent = props => {
 
   const businessResourse = new BusinessResource();
@@ -24,7 +23,7 @@ const RestaurantComponent = props => {
     try {
       const restaurants = await businessResourse.getRestaurants(coordinates);
       setRestaurants(restaurants.businesses);
-    } catch (error) { }
+    } catch (error) { console.log(error) }
   };
 
   useEffect(() => {
@@ -34,7 +33,8 @@ const RestaurantComponent = props => {
   const rating = rating => {
     let wholeStars = Math.floor(rating);
     let icons = [];
-    for (count = 1; count <= wholeStars; count++) {
+    for (let count = 1; count <= wholeStars; count++) {
+      {rating % 2 == 0 ? 
       icons.push(
         <FontAwesome
           key={count}
@@ -42,19 +42,18 @@ const RestaurantComponent = props => {
           color="rgb(246,178,46)"
           fontSize={20}
         />
-      );
+      ) : 
+        icons.push(
+          <FontAwesome
+            key={count}
+            name="star-half-empty"
+            color="rgb(246,178,46)"
+            fontSize={20}
+          />
+        );
+      }
     }
-    if (rating % 2 != 0) {
-      icons.push(
-        <FontAwesome
-          key={count}
-          name="star-half-empty"
-          color="rgb(246,178,46)"
-          fontSize={20}
-        />
-      );
-    }
-    for (count = icons.length + 1; count <= 5; count++) {
+    for (let count = icons.length + 1; count <= 5; count++) {
       icons.push(
         <FontAwesome
           key={count}
