@@ -6,23 +6,21 @@ import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import { AppLoading } from "expo";
 
-
 const HomeComponent = props => {
 
   const [coordinates, setCoordinates] = useState({});
   const [loading, setLoading] = useState(true);
-
   const loadFonts = async () => {
     try {
       if (Platform.OS === "android") {
         await Font.loadAsync({
-          Roboto: require("../node_modules/native-base/Fonts/Roboto.ttf"),
-          Roboto_medium: require("../node_modules/native-base/Fonts/Roboto_medium.ttf"),
+          Roboto: require("../assets/Roboto.ttf"),
+          Roboto_medium: require("../assets/Roboto_medium.ttf"),
           ...Ionicons.font
         });
       }
       setLoading(false);
-    } catch (error) { }
+    } catch (error) { console.log(error) }
   };
 
   const findCoordinates = () => {
@@ -53,8 +51,7 @@ const HomeComponent = props => {
         ) : (
             <Grid style={{ alignItems: "center" }}>
               <Col>
-                <Button
-                  style={{ alignSelf: "center" }}
+                <Button style={{ alignSelf: "center" }}
                   onPress={() => {
                     props.navigation.navigate("Restaurants", {
                       coordinates
