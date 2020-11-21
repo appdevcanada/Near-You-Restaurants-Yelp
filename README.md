@@ -1,2 +1,2 @@
 # Yelp
-REACT Native for iOS and Android project with geolocation and Yelp API to locate restaurants around you.
+React Native App created for iOS and Android with geolocation and Yelp API to locate restaurants around you.
