@@ -1,3 +1,4 @@
+import React from "react";
 import HomeComponent from "./components/Home.component";
 import RestaurantDetailsComponent from "./components/RestaurantDetail.component";
 import RestaurantComponent from "./components/Restaurant.component";
@@ -13,7 +14,7 @@ export default function AppNavigator() {
         <Stack.Screen name="Home"
           component={HomeComponent}
           options={{
-            title: "The best restaurants near you",
+            title: "Resto - Restaurants near you",
             headerStyle: { backgroundColor: "#D0ECFB" }
           }} />
         <Stack.Screen name="Restaurants"

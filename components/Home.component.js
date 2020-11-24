@@ -4,7 +4,6 @@ import { Container, Content, Button, Text, Spinner } from "native-base";
 import { Grid, Col } from "react-native-easy-grid";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
-import { AppLoading } from "expo";
 
 const HomeComponent = props => {
 

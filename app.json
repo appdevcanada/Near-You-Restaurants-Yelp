@@ -1,9 +1,8 @@
 {
   "expo": {
     "name": "Resto",
-    "slug": "mad9135-final",
+    "slug": "Luis_Souza-Resto-Yelp",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
       "android",

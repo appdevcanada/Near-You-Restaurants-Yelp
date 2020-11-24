@@ -15,26 +15,26 @@ import BusinessResource from "../resources/Business.resource";
 
 const RestaurantComponent = props => {
 
-  const businessResourse = new BusinessResource();
+  const businessResource = new BusinessResource();
 
   const [restaurants, setRestaurants] = useState([]);
 
   const loadRestaurants = async coordinates => {
     try {
-      const restaurants = await businessResourse.getRestaurants(coordinates);
+      const restaurants = await businessResource.getRestaurants(coordinates);
       setRestaurants(restaurants.businesses);
     } catch (error) { console.log(error) }
   };
 
   useEffect(() => {
-    loadRestaurants(props.navigation.getParam("coordinates"));
+    loadRestaurants(props.route.params.coordinates);
   }, []);
 
   const rating = rating => {
     let wholeStars = Math.floor(rating);
     let icons = [];
-    for (let count = 1; count <= wholeStars; count++) {
-      {rating % 2 == 0 ? 
+    let count = 0;
+    for (count = 1; count <= wholeStars; count++) {
       icons.push(
         <FontAwesome
           key={count}
@@ -42,18 +42,18 @@ const RestaurantComponent = props => {
           color="rgb(246,178,46)"
           fontSize={20}
         />
-      ) : 
-        icons.push(
-          <FontAwesome
-            key={count}
-            name="star-half-empty"
-            color="rgb(246,178,46)"
-            fontSize={20}
-          />
-        );
-      }
+      );
     }
-    for (let count = icons.length + 1; count <= 5; count++) {
+    if (rating % 2 != 0) {
+      icons.push(
+        <FontAwesome
+          key={count}
+          name="star-half-empty"
+          color="rgb(246,178,46)"
+          fontSize={20}
+        />)
+    }
+    for (count = icons.length + 1; count <= 5; count++) {
       icons.push(
         <FontAwesome
           key={count}
@@ -91,10 +91,10 @@ const RestaurantComponent = props => {
                   <Card>
                     <CardItem header bordered>
                       <Grid>
-                        <Col>
-                          <Text>{item.name}</Text>
+                        <Col style={{ width: '60%' }}>
+                          <Text style={{ fontWeight: "bold", fontSize: 18 }}>{item.name}</Text>
                         </Col>
-                        <Col style={{ flex: 1, alignItems: "flex-end" }}>
+                        <Col style={{ width: '40%', flex: 1, alignItems: "flex-end" }}>
                           <Row>{rating(item.rating)}</Row>
                           <Row>
                             <Text>{(item.distance / 1000).toFixed(2)} Km</Text>
@@ -104,12 +104,11 @@ const RestaurantComponent = props => {
                     </CardItem>
                     <CardItem cardBody>
                       <Image
-                        source={{ uri: item.image_url ? item.image_url : "none" }}
+                        source={{ uri: item.image_url != "" ? item.image_url : "https://via.placeholder.com/200/D0ECFB/000000?text=No+Image+Available" }}
                         style={{ height: 200, width: null, flex: 1 }}
                       />
                     </CardItem>
-                    <CardItem
-                      footer
+                    <CardItem footer
                       style={{ flex: 1, justifyContent: "space-between" }}
                     >
                       <Text>{item.location.address1}</Text>

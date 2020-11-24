@@ -17,7 +17,7 @@ class FetchResource {
         this.baseUrl + resource,
         this.requestDetails
       );
-      return await this._handleResponse(response);
+      return this._handleResponse(response);
     } catch (err) {
       return Promise.reject(err);
     }
