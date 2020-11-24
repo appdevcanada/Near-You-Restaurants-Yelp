@@ -1,40 +1,34 @@
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
 import HomeComponent from "./components/Home.component";
 import RestaurantDetailsComponent from "./components/RestaurantDetail.component";
 import RestaurantComponent from "./components/Restaurant.component";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
+const Stack = createStackNavigator();
 
-const AppNavigator = createStackNavigator(
-  {
-    Home: {
-      screen: HomeComponent,
-      navigationOptions: {
-        title: "The best restaurants near you",
-        headerStyle: { backgroundColor: "#D0ECFB" }
-      }
-    },
-    Restaurants: {
-      screen: RestaurantComponent,
-      navigationOptions: {
-        title: "Restaurants",
-        headerStyle: { backgroundColor: "#D0ECFB" }
-      }
-    },
-    RestaurantDetails: {
-      screen: RestaurantDetailsComponent,
-      navigationOptions: {
-        title: "Details",
-        headerStyle: { backgroundColor: "#D0ECFB" }
-      }
-    }
-  },
-  {
-    initialRouteName: "Home",
-    defaultNavigationOptions: {
-      headerStyle: { backgroundColor: "#D0ECFB" }
-    }
-  }
-);
-
-export default createAppContainer(AppNavigator);
+export default function AppNavigator() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home"
+          component={HomeComponent}
+          options={{
+            title: "The best restaurants near you",
+            headerStyle: { backgroundColor: "#D0ECFB" }
+          }} />
+        <Stack.Screen name="Restaurants"
+          component={RestaurantComponent}
+          options={{
+            title: "Restaurants",
+            headerStyle: { backgroundColor: "#D0ECFB" }
+          }} />
+        <Stack.Screen name="RestaurantDetails"
+          component={RestaurantDetailsComponent}
+          options={{
+            title: "Details",
+            headerStyle: { backgroundColor: "#D0ECFB" }
+          }} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
