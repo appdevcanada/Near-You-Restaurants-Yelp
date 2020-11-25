@@ -23,7 +23,8 @@ const RestaurantComponent = props => {
     try {
       const restaurants = await businessResource.getRestaurants(coordinates);
       setRestaurants(restaurants.businesses);
-    } catch (error) { console.log(error) }
+    }
+    catch (error) { console.log(error) }
   };
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const RestaurantComponent = props => {
           key={count}
           name="star"
           color="rgb(246,178,46)"
-          fontSize={20}
+          size={16}
         />
       );
     }
@@ -50,7 +51,7 @@ const RestaurantComponent = props => {
           key={count}
           name="star-half-empty"
           color="rgb(246,178,46)"
-          fontSize={20}
+          size={16}
         />)
     }
     for (count = icons.length + 1; count <= 5; count++) {
@@ -59,17 +60,16 @@ const RestaurantComponent = props => {
           key={count}
           name="star-o"
           color="rgb(246,178,46)"
-          fontSize={20}
+          size={16}
         />
       );
     }
     return icons;
   };
 
-
   return (
     <Container>
-      <Content contentContainerStyle={{ flex: 1 }}>
+      <Content contentContainerStyle={{ flex: 1 }} padder>
         {restaurants.length == 0 ? (
           <Grid style={{ alignItems: "center" }}>
             <Col>
@@ -88,11 +88,12 @@ const RestaurantComponent = props => {
                     });
                   }}
                 >
-                  <Card>
-                    <CardItem header bordered>
+                  <Card style={{ borderRadius: 10 }}>
+                    <CardItem header bordered style={{ borderRadius: 10 }}>
                       <Grid>
                         <Col style={{ width: '60%' }}>
                           <Text style={{ fontWeight: "bold", fontSize: 18 }}>{item.name}</Text>
+                          <Text note style={{ fontWeight: "normal" }}>{item.categories[0].title}</Text>
                         </Col>
                         <Col style={{ width: '40%', flex: 1, alignItems: "flex-end" }}>
                           <Row>{rating(item.rating)}</Row>
@@ -109,7 +110,7 @@ const RestaurantComponent = props => {
                       />
                     </CardItem>
                     <CardItem footer
-                      style={{ flex: 1, justifyContent: "space-between" }}
+                      style={{ flex: 1, justifyContent: "space-between", borderRadius: 10 }}
                     >
                       <Text>{item.location.address1}</Text>
                       <Text>{item.display_phone}</Text>

@@ -15,6 +15,7 @@ import BusinessResource from "../resources/Business.resource";
 
 
 const RestaurantDetailComponent = props => {
+  const [width, setWidth] = useState(300);
   const restaurant = props.route.params.restaurant;
   const [restaurantDetails, setRestaurantDetails] = useState(undefined);
   const businessResourse = new BusinessResource();
@@ -32,6 +33,10 @@ const RestaurantDetailComponent = props => {
     loadRestaurantDetails();
   }, []);
 
+  const onLayout = e => {
+    setWidth(e.nativeEvent.layout.width);
+  };
+
   return (
     <Container>
       <Content contentContainerStyle={{ flex: 1 }}>
@@ -43,11 +48,11 @@ const RestaurantDetailComponent = props => {
           </Grid>
         ) : (
             <Card>
-              <CardItem header bordered>
-                <Text style={{ fontWeight: "bold", fontSize: 18 }}>{restaurantDetails.name}</Text>
+              <CardItem header>
+                <Text style={{ fontWeight: "bold", fontSize: 18, color: "#0083ff" }}>{restaurantDetails.name}</Text>
               </CardItem>
-              <CardItem cardBody>
-                <SliderBox images={restaurantDetails.photos} />
+              <CardItem cardBody onLayout={onLayout}>
+                <SliderBox parentWidth={width} images={restaurantDetails.photos} sliderBoxHeight={400} autoplay={true} />
               </CardItem>
               <CardItem>
                 <Text style={{ fontWeight: "bold" }}>Cuisine: </Text>
@@ -59,7 +64,7 @@ const RestaurantDetailComponent = props => {
               </CardItem>
               <CardItem>
                 <Text style={{ fontWeight: "bold" }}>Price: </Text>
-                <Text>{restaurantDetails.price}</Text>
+                <Text>{restaurantDetails.price != null ? restaurantDetails.price : "Not evaluated"}</Text>
               </CardItem>
               <CardItem>
                 <Text style={{ fontWeight: "bold" }}>Phone: </Text>

@@ -14,20 +14,22 @@ export default function AppNavigator() {
         <Stack.Screen name="Home"
           component={HomeComponent}
           options={{
-            title: "Resto - Restaurants near you",
+            title: "🍴Resto - Restaurants near you",
             headerStyle: { backgroundColor: "#D0ECFB" }
           }} />
         <Stack.Screen name="Restaurants"
           component={RestaurantComponent}
           options={{
-            title: "Restaurants",
-            headerStyle: { backgroundColor: "#D0ECFB" }
+            title: "Restaurants List",
+            headerStyle: { backgroundColor: "#D0ECFB" },
+            headerBackTitleVisible: false,
           }} />
         <Stack.Screen name="RestaurantDetails"
           component={RestaurantDetailsComponent}
           options={{
-            title: "Details",
-            headerStyle: { backgroundColor: "#D0ECFB" }
+            title: "Restaurant Details",
+            headerStyle: { backgroundColor: "#D0ECFB" },
+            headerBackTitleVisible: false,
           }} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -40,7 +40,7 @@ const HomeComponent = props => {
 
   return (
     <Container>
-      <Content contentContainerStyle={{ flex: 1 }} style={{ padding: 10 }}>
+      <Content contentContainerStyle={{ flex: 1 }} padder>
         {loading ? (
           <Grid style={{ alignItems: "center" }}>
             <Col>
