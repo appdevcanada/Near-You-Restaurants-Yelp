@@ -12,8 +12,6 @@ import { Grid, Col } from "react-native-easy-grid";
 import Entypo from "react-native-vector-icons/Entypo";
 import { SliderBox } from "react-native-image-slider-box";
 import BusinessResource from "../resources/Business.resource";
-
-
 const RestaurantDetailComponent = props => {
   const [width, setWidth] = useState(300);
   const restaurant = props.route.params.restaurant;
@@ -26,7 +24,7 @@ const RestaurantDetailComponent = props => {
         restaurant.id
       );
       setRestaurantDetails(restaurantDetails);
-    } catch (error) { }
+    } catch (error) { console.log(error); }
   };
 
   useEffect(() => {

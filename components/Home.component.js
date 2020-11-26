@@ -4,6 +4,8 @@ import { Container, Content, Button, Text, Spinner } from "native-base";
 import { Grid, Col } from "react-native-easy-grid";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
 
 const HomeComponent = props => {
 
@@ -19,18 +21,22 @@ const HomeComponent = props => {
         });
       }
       setLoading(false);
-    } catch (error) { console.log(error) }
+    } catch (error) { console.log(error); }
   };
 
-  const findCoordinates = () => {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const { latitude, longitude } = position.coords;
-        setCoordinates({ latitude, longitude });
-      },
-      error => alert(error.message),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
+  const findCoordinates = async () => {
+    let { status } = await Location.requestPermissionsAsync();
+    if (status !== 'granted') {
+      this.setState({
+        locationResult: 'Permission to access location was denied',
+      });
+      console.log('Permission to access location was denied');
+      return;
+    } else {
+      let location = await Location.getCurrentPositionAsync({ accuracy: 3 }); // Accuracy.Balanced
+      const { latitude, longitude } = location.coords;
+      setCoordinates({ latitude, longitude });
+    }
   };
 
   useEffect(() => {
@@ -56,7 +62,7 @@ const HomeComponent = props => {
                       coordinates
                     });
                   }}>
-                  <Text>Find restaurants near me!</Text>
+                  <Text>I'm starving!</Text>
                 </Button>
               </Col>
             </Grid>

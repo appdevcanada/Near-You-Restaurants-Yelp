@@ -18,13 +18,14 @@ const RestaurantComponent = props => {
   const businessResource = new BusinessResource();
 
   const [restaurants, setRestaurants] = useState([]);
+  const imgPlaceHolder = "https://via.placeholder.com/200/D0ECFB/000000?text=No+Image+Available";
 
   const loadRestaurants = async coordinates => {
     try {
       const restaurants = await businessResource.getRestaurants(coordinates);
       setRestaurants(restaurants.businesses);
     }
-    catch (error) { console.log(error) }
+    catch (error) { console.log(error); }
   };
 
   useEffect(() => {
@@ -105,7 +106,7 @@ const RestaurantComponent = props => {
                     </CardItem>
                     <CardItem cardBody>
                       <Image
-                        source={{ uri: item.image_url != "" ? item.image_url : "https://via.placeholder.com/200/D0ECFB/000000?text=No+Image+Available" }}
+                        source={{ uri: item.image_url != "" ? item.image_url : imgPlaceHolder }}
                         style={{ height: 200, width: null, flex: 1 }}
                       />
                     </CardItem>

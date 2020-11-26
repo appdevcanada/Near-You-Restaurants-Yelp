@@ -24,7 +24,9 @@
     "react-native-safe-area-context": "3.1.4",
     "react-native-screens": "~2.10.1",
     "react-native-snap-carousel": "^3.8.4",
-    "react-native-web": "~0.13.7"
+    "react-native-web": "~0.13.7",
+    "expo-permissions": "~9.3.0",
+    "expo-location": "~9.0.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^8.3.0",
