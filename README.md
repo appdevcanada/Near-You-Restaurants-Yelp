@@ -36,7 +36,7 @@ This will open the browser with the available options to test the application.
 Select iOS or Android to open it in the simulator, or in your device. In order to run in simulators, you need to have them previously installed.
 This app was not created to run/simulate in web browsers, only in mobile devices.
 
-## Libraries We'll Use
+## Used Libraries
 
 This app uses the following technologies/libraries:
 
