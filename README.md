@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/assets/splash2.png" width="200px" alt="React Native Resto Yelp App" />
+  <img src="/assets/splash2.png" width="300px" alt="React Native Resto Yelp App" />
 </p>
 
 # Resto - Yelp React Native App
