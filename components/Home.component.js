@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Platform } from 'react-native';
-import { Container, Content, Button, Text, Spinner } from "native-base";
+import { Container, Button, Text, Spinner } from "native-base";
 import { Grid, Col } from "react-native-easy-grid";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
-import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeComponent = props => {
 
@@ -45,30 +45,28 @@ const HomeComponent = props => {
   }, []);
 
   return (
-    <Container>
-      <Content contentContainerStyle={{ flex: 1 }} padder>
-        {loading ? (
+    <SafeAreaView style={{ flex: 1, backgroundColor: "rgb(240, 240, 240)" }}>
+      {loading ? (
+        <Grid style={{ alignItems: "center" }}>
+          <Col>
+            <Spinner color="blue" />
+          </Col>
+        </Grid>
+      ) : (
           <Grid style={{ alignItems: "center" }}>
             <Col>
-              <Spinner color="blue" />
+              <Button style={{ alignSelf: "center", backgroundColor: "rgb(47, 47, 47)" }}
+                onPress={() => {
+                  props.navigation.navigate("Restaurants", {
+                    coordinates
+                  });
+                }}>
+                <Text style={{ color: "rgb(255, 238, 0)" }}>I'm starving!</Text>
+              </Button>
             </Col>
           </Grid>
-        ) : (
-            <Grid style={{ alignItems: "center" }}>
-              <Col>
-                <Button style={{ alignSelf: "center" }}
-                  onPress={() => {
-                    props.navigation.navigate("Restaurants", {
-                      coordinates
-                    });
-                  }}>
-                  <Text>I'm starving!</Text>
-                </Button>
-              </Col>
-            </Grid>
-          )}
-      </Content>
-    </Container>
+        )}
+    </SafeAreaView>
   );
 };
 
